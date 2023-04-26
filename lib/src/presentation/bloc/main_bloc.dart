@@ -3,8 +3,7 @@ import 'package:casino_test/src/presentation/bloc/main_event.dart';
 import 'package:casino_test/src/presentation/bloc/main_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainPageBloc
-    extends Bloc<MainPageEvent, MainPageState> {
+class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   final CharactersRepository _charactersRepository;
 
   MainPageBloc(
@@ -26,10 +25,11 @@ class MainPageBloc
     DataLoadedOnMainPageEvent event,
     Emitter<MainPageState> emit,
   ) async {
-    if (event.characters == null) {
-      emit(SuccessfulMainPageState(event.characters!));
-    } else {
+    final _characters = event.characters;
+    if (_characters == null) {
       emit(UnSuccessfulMainPageState());
+    } else {
+      emit(SuccessfulMainPageState(_characters));
     }
   }
 

@@ -14,7 +14,7 @@ class GetTestDataOnMainPageEvent extends MainPageEvent {
   const GetTestDataOnMainPageEvent(this.page);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [page];
 }
 
 class LoadingDataOnMainPageEvent extends MainPageEvent {
