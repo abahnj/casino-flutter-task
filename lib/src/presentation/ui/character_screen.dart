@@ -9,6 +9,8 @@ import 'package:get_it/get_it.dart';
 
 @immutable
 class CharactersScreen extends StatelessWidget {
+  const CharactersScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,7 @@ class CharactersScreen extends StatelessWidget {
             } else if (state is SuccessfulMainPageState) {
               return _successfulWidget(context, state);
             } else {
-              return Center(child: const Text("error"));
+              return const Center(child: Text("error"));
             }
           },
         ),
@@ -38,9 +40,9 @@ class CharactersScreen extends StatelessWidget {
       child: Container(
         width: 50,
         height: 50,
-        margin: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
+        margin: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: const CircularProgressIndicator(),
       ),
@@ -61,12 +63,12 @@ class CharactersScreen extends StatelessWidget {
   Widget _characterWidget(BuildContext context, Character character) {
     return Container(
       alignment: Alignment.topLeft,
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Container(
         padding: const EdgeInsets.all(16),
         width: double.infinity,
         decoration: ShapeDecoration(
-          color: Color.fromARGB(120, 204, 255, 255),
+          color: const Color.fromARGB(120, 204, 255, 255),
           shape: ContinuousRectangleBorder(
             borderRadius: BorderRadius.circular(32),
           ),
