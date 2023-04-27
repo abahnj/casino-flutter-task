@@ -1,5 +1,5 @@
-import 'package:casino_test/src/data/models/character.dart';
 import 'package:casino_test/src/data/repository/characters_repository.dart';
+import 'package:casino_test/src/domain/entities/character_entity.dart';
 import 'package:casino_test/src/presentation/bloc/main_bloc.dart';
 import 'package:casino_test/src/presentation/bloc/main_event.dart';
 import 'package:casino_test/src/presentation/bloc/main_state.dart';
@@ -51,16 +51,17 @@ class CharactersScreen extends StatelessWidget {
 
   Widget _successfulWidget(
       BuildContext context, SuccessfulMainPageState state) {
+    final characters = state.characterList.characters;
     return ListView.builder(
-      cacheExtent: double.infinity,
-      itemCount: state.characters.length,
+      cacheExtent: 2,
+      itemCount: characters.length,
       itemBuilder: (context, index) {
-        return _characterWidget(context, state.characters[index]);
+        return _characterWidget(context, characters[index]);
       },
     );
   }
 
-  Widget _characterWidget(BuildContext context, Character character) {
+  Widget _characterWidget(BuildContext context, CharacterEntity character) {
     return Container(
       alignment: Alignment.topLeft,
       padding: const EdgeInsets.all(8),

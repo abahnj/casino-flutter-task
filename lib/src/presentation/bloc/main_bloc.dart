@@ -27,8 +27,8 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     DataLoadedOnMainPageEvent event,
     Emitter<MainPageState> emit,
   ) async {
-    final characters = event.characters;
-    if (characters == null) {
+    final characters = event.characterList;
+    if (characters.isEmpty) {
       emit(UnSuccessfulMainPageState());
     } else {
       emit(SuccessfulMainPageState(characters));
@@ -40,14 +40,12 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     Emitter<MainPageState> emit,
   ) async {
     add(const LoadingDataOnMainPageEvent());
-    try {
-      _charactersRepository.getCharacters(event.page).then(
-        (value) {
-          add(DataLoadedOnMainPageEvent(value));
-        },
-      );
-    } catch (e) {
-      emit(UnSuccessfulMainPageState());
-    }
+
+    final result = await _charactersRepository.getCharacters(event.page);
+
+    result.match(
+      onSuccess: (characters) => add(DataLoadedOnMainPageEvent(characters)),
+      onError: (_) => emit(UnSuccessfulMainPageState()),
+    );
   }
 }
