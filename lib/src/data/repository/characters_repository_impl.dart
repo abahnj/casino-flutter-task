@@ -1,29 +1,21 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:casino_test/src/data/models/character.dart';
+import 'package:casino_test/src/core/result_monad.dart';
+import 'package:casino_test/src/data/data_sources/character_remote_datasource.dart';
 import 'package:casino_test/src/data/repository/characters_repository.dart';
-import 'package:http/http.dart';
+import 'package:casino_test/src/domain/entities/characters_list_entity.dart';
 
 class CharactersRepositoryImpl implements CharactersRepository {
-  final Client client;
+  CharactersRepositoryImpl(this.remoteDataSource);
 
-  CharactersRepositoryImpl(this.client);
+  final CharacterRemoteDataSource remoteDataSource;
 
   @override
-  Future<List<Character>?> getCharacters(int page) async {
-    var client = Client();
-    final charResult = await client.get(
-      Uri.parse("https://rickandmortyapi.com/api/character/?page=$page"),
-    );
-    final jsonMap = await json.decode(charResult.body) as Map<String, dynamic>;
+  Future<Result<CharactersListEntity, Error>> getCharacters(int page) async {
+    // Fetch characters list from the remote data source
+    final charactersList = await remoteDataSource.getCharacters(page);
 
-    return Future.value(
-      List.of(
-        (jsonMap["results"] as List<dynamic>).map(
-          (value) => Character.fromJson(value),
-        ),
-      ),
-    );
+    // Convert the data model object to a domain entity object
+    return charactersList.map((data) => data.toEntity());
   }
 }
