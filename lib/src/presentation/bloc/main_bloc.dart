@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:casino_test/src/data/repository/characters_repository.dart';
 import 'package:casino_test/src/presentation/bloc/main_event.dart';
 import 'package:casino_test/src/presentation/bloc/main_state.dart';
@@ -37,10 +39,15 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     GetTestDataOnMainPageEvent event,
     Emitter<MainPageState> emit,
   ) async {
-    _charactersRepository.getCharacters(event.page).then(
-      (value) {
-        add(DataLoadedOnMainPageEvent(value));
-      },
-    );
+    add(const LoadingDataOnMainPageEvent());
+    try {
+      _charactersRepository.getCharacters(event.page).then(
+        (value) {
+          add(DataLoadedOnMainPageEvent(value));
+        },
+      );
+    } catch (e) {
+      emit(UnSuccessfulMainPageState());
+    }
   }
 }
