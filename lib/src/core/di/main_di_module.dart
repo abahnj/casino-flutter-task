@@ -1,3 +1,4 @@
+import 'package:casino_test/src/data/data_sources/character_remote_datasource.dart';
 import 'package:casino_test/src/data/repository/characters_repository.dart';
 import 'package:casino_test/src/data/repository/characters_repository_impl.dart';
 import 'package:get_it/get_it.dart';
@@ -7,7 +8,12 @@ class MainDIModule {
   void configure(GetIt getIt) {
     final httpClient = Client();
 
+    getIt.registerLazySingleton<Client>(() => httpClient);
+
+    getIt.registerLazySingleton<CharacterRemoteDataSource>(
+        () => CharacterRemoteDataSourceImpl(client: getIt.get()));
+
     getIt.registerLazySingleton<CharactersRepository>(
-        () => CharactersRepositoryImpl(httpClient));
+        () => CharactersRepositoryImpl(getIt.get()));
   }
 }
