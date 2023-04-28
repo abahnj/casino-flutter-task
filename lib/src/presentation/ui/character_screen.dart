@@ -59,7 +59,7 @@ class _CharactersScreenConsumerState extends State<CharactersScreenConsumer> {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
-    print(currentScroll / maxScroll);
+
     return currentScroll >= (maxScroll * _scrollThreshold);
   }
 
@@ -121,6 +121,7 @@ class _CharactersScreenConsumerState extends State<CharactersScreenConsumer> {
       CharactersContent(
         charactersData: data,
         scrollController: controller,
+        loading: loading,
       );
 }
 
