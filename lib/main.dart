@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 void main() {
-  MainDIModule().configure(GetIt.I);
+  locatorSetup();
 
   bootstrap(() => const MyApp());
 }
@@ -15,9 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Test app',
-      home: CharactersScreen(),
+      home: const CharacterScreen(),
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData.dark(),
     );
   }
 }

@@ -1,19 +1,27 @@
 import 'package:casino_test/src/data/data_sources/character_remote_datasource.dart';
 import 'package:casino_test/src/data/repository/characters_repository.dart';
 import 'package:casino_test/src/data/repository/characters_repository_impl.dart';
+import 'package:casino_test/src/domain/usecases/get_characters_use_case.dart';
+import 'package:casino_test/src/presentation/bloc/characters_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
-class MainDIModule {
-  void configure(GetIt getIt) {
-    final httpClient = Client();
+final locator = GetIt.instance;
 
-    getIt.registerLazySingleton<Client>(() => httpClient);
+void locatorSetup() {
+  final httpClient = Client();
 
-    getIt.registerLazySingleton<CharacterRemoteDataSource>(
-        () => CharacterRemoteDataSourceImpl(client: getIt.get()));
+  locator.registerFactory<CharactersBloc>(
+      () => CharactersBloc(locator.get<GetCharacters>()));
 
-    getIt.registerLazySingleton<CharactersRepository>(
-        () => CharactersRepositoryImpl(getIt.get()));
-  }
+  locator.registerLazySingleton<GetCharacters>(
+      () => GetCharacters(locator.get<CharactersRepository>()));
+
+  locator.registerLazySingleton<Client>(() => httpClient);
+
+  locator.registerLazySingleton<CharacterRemoteDataSource>(
+      () => CharacterRemoteDataSourceImpl(client: locator.get()));
+
+  locator.registerLazySingleton<CharactersRepository>(
+      () => CharactersRepositoryImpl(locator.get()));
 }
