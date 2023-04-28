@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:casino_test/src/core/models/persistent_bloc_state.dart';
 import 'package:casino_test/src/domain/usecases/get_characters_use_case.dart';
 import 'package:casino_test/src/presentation/bloc/characters_event.dart';
 import 'package:casino_test/src/presentation/bloc/characters_state.dart';
@@ -23,8 +22,6 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   }
 
   Future<void> _fetchCharacters(Emitter<CharactersState> emit) async {
-    if (state.data != null && state is PersistentLoadingCubitState) return;
-
     emit(state.toLoading(state.data));
 
     final pageToFetch = _pageToFetch(state.data);
