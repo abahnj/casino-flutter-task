@@ -4,6 +4,8 @@ import 'package:casino_test/src/presentation/bloc/characters_event.dart';
 import 'package:casino_test/src/presentation/bloc/characters_state.dart';
 import 'package:casino_test/src/presentation/ui/exception_indicators/error_indicator.dart';
 import 'package:casino_test/src/presentation/ui/widgets/character_card.dart';
+import 'package:casino_test/src/presentation/ui/widgets/loading_indicator.dart';
+import 'package:casino_test/src/presentation/ui/widgets/retry_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -69,7 +71,7 @@ class _CharactersScreenConsumerState extends State<CharactersScreenConsumer> {
       appBar: AppBar(title: const Text('Characters')),
       body: BlocConsumer<CharactersBloc, CharactersState>(
         listener: (context, state) {},
-        builder: (blocContext, state) => state.match(
+        builder: (_, state) => state.match(
           onLoading: (data) => data == null
               ? _loadingWidget(context)
               : _successfulWidget(
@@ -140,45 +142,6 @@ class CharactersErrorContent extends StatelessWidget {
     return ErrorIndicator(
       error: error,
       onTryAgain: retry,
-    );
-  }
-}
-
-class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: SizedBox(
-        height: 100,
-        child: Center(child: CircularProgressIndicator()),
-      ),
-    );
-  }
-}
-
-class RetryButton extends StatelessWidget {
-  const RetryButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: () {
-            context.read<CharactersBloc>().add(const FetchCharacters());
-          },
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            textStyle: const TextStyle(fontSize: 18.0),
-          ),
-          child: const Text('Retry'),
-        ),
-      ),
     );
   }
 }
