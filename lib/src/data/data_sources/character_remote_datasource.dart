@@ -17,9 +17,11 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
   Future<Result<CharactersList, Error>> getCharacters(int page) async {
     try {
       // Fetch data from the API and convert it to a list of Character objects
-      final charResult = await client.get(
-        Uri.parse("https://rickandmortyapi.com/api/character/?page=$page"),
-      );
+      final charResult = await client
+          .get(
+            Uri.parse("https://rickandmortyapi.com/api/character/?page=$page"),
+          )
+          .timeout(const Duration(seconds: 5));
       final jsonMap =
           await json.decode(charResult.body) as Map<String, dynamic>;
 
