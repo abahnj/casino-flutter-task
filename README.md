@@ -7,29 +7,29 @@ Your goal is to create the app with all the characters from this cartoon, and ma
 
 API docs: https://rickandmortyapi.com/documentation
 
-##To-do:
+## To-do:
 
 Using clean architecture design pattern
-- Refactor application to your best understanding of the design pattern
-- Fix loading state and fetching data feature
-- Find and fix all other bugs and issues
-- Add more information about characters
-- Optimize scrolling performance
-- Implement pagination
+- [x] Refactor application to your best understanding of the design pattern
+- [x] Fix loading state and fetching data feature
+- [x] Find and fix all other bugs and issues
+- [x] Add more information about characters
+- [x] Optimize scrolling performance
+- [x] Implement pagination
 
 ## Optional:
 Implement pagination
-- Add infinite scrolling pagination
-- Implement recovering from an `Error` state after the last request failed in the paginated view (i.e Application should be able to make a request and return a success response when the previous request fails. Read `Notes` for more information)
-- Account for all possible states and edge cases
-    - Initial
-    - Loading
-        - Initial loading state (when fetching the first page)
-        - Next page loading state (when fetching the next page after previous pages has been fetched successfully)
-    - Success
-    - Error 
-        - Initial error state (when fetching the first page)
-        - Next page error state (when fetching the next page after previous pages has been fetched successfully)
+- [x] Add infinite scrolling pagination
+- [x] Implement recovering from an `Error` state after the last request failed in the paginated view (i.e Application should be able to make a request and return a success response when the previous request fails. 
+- [x] Account for all possible states and edge cases
+    - [x] Initial
+    - [x] Loading
+        - [x] Initial loading state (when fetching the first page)
+        - [x] Next page loading state (when fetching the next page after previous pages has been fetched successfully)
+    - [x] Success
+    - [x] Error 
+        - [x] Initial error state (when fetching the first page)
+        - [x] Next page error state (when fetching the next page after previous pages has been fetched successfully)
 
 
 ## Things to keep in mind
