@@ -1,6 +1,6 @@
 import 'package:casino_test/bootstrap.dart';
-import 'package:casino_test/src/core/di/main_di_module.dart';
-import 'package:casino_test/src/presentation/ui/character_screen.dart';
+import 'package:casino_test/core/di/main_di_module.dart';
+import 'package:casino_test/presentation/ui/character_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
