@@ -27,7 +27,7 @@ class CharactersList extends CharactersListEntity {
   List<Object> get props => [info, characters];
 
   @override
-  String toString() => 'CharacterList(info: $info, characters: $characters)';
+  String toString() => 'CharactersList(info: $info, characters: $characters)';
 }
 
 @JsonSerializable()

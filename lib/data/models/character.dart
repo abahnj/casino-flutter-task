@@ -1,4 +1,3 @@
-import 'package:casino_test/data/models/location.dart';
 import 'package:casino_test/domain/entities/character_entity.dart';
 import 'package:casino_test/domain/entities/location_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -8,7 +7,7 @@ part 'character.g.dart';
 @JsonSerializable()
 @LocationEntityConverter()
 class Character extends CharacterEntity {
-  Character({
+  const Character({
     required super.name,
     required super.image,
     required super.id,
@@ -17,12 +16,9 @@ class Character extends CharacterEntity {
     required super.type,
     required super.gender,
     required super.episode,
-    required Location origin,
-    required Location location,
-  }) : super(
-          origin: LocationEntity(name: origin.name, url: origin.url),
-          location: LocationEntity(name: location.name, url: location.url),
-        );
+    required super.origin,
+    required super.location,
+  });
 
   factory Character.fromJson(Map<String, dynamic> json) =>
       _$CharacterFromJson(json);

@@ -4,26 +4,26 @@ typedef OnStateLoading<R> = R Function();
 typedef OnStateError<R, E extends Object> = R Function(E error);
 typedef OnStateLoaded<R, D> = R Function(D data);
 
-/// Base state for cubits that do async loading.
+/// Base state for blocs that do async loading.
 /// The error type [E] extends [Object] to not allow `void` for errors. More precise
 /// error information should be provided here.
-abstract class CubitState<D, E extends Object> extends Equatable {
-  const CubitState._();
+abstract class BlocState<D, E extends Object> extends Equatable {
+  const BlocState._();
 
-  static CubitState<D, E> loading<D, E extends Object>() =>
-      LoadingCubitState<D, E>();
+  static BlocState<D, E> loading<D, E extends Object>() =>
+      LoadingBlocState<D, E>();
 
-  static CubitState<D, E> error<D, E extends Object>(E error) =>
-      ErrorCubitState<D, E>(error);
+  static BlocState<D, E> error<D, E extends Object>(E error) =>
+      ErrorBlocState<D, E>(error);
 
-  static CubitState<D, E> loaded<D, E extends Object>(D data) =>
-      LoadedCubitState<D, E>(data);
+  static BlocState<D, E> loaded<D, E extends Object>(D data) =>
+      LoadedBlocState<D, E>(data);
 
-  CubitState<D, E> toLoading() => LoadingCubitState<D, E>();
+  BlocState<D, E> toLoading() => LoadingBlocState<D, E>();
 
-  CubitState<D, E> toError(E error) => ErrorCubitState<D, E>(error);
+  BlocState<D, E> toError(E error) => ErrorBlocState<D, E>(error);
 
-  CubitState<D, E> toLoaded(D data) => LoadedCubitState<D, E>(data);
+  BlocState<D, E> toLoaded(D data) => LoadedBlocState<D, E>(data);
 
   /// Provides a null-safe access to the different states and the
   /// associated [data] or [error], for example to build Widgets. Example:
@@ -57,8 +57,8 @@ abstract class CubitState<D, E extends Object> extends Equatable {
       );
 }
 
-class LoadingCubitState<D, E extends Object> extends CubitState<D, E> {
-  const LoadingCubitState() : super._();
+class LoadingBlocState<D, E extends Object> extends BlocState<D, E> {
+  const LoadingBlocState() : super._();
 
   @override
   R match<R>({
@@ -75,8 +75,8 @@ class LoadingCubitState<D, E extends Object> extends CubitState<D, E> {
   List<Object?> get props => [];
 }
 
-class ErrorCubitState<D, E extends Object> extends CubitState<D, E> {
-  const ErrorCubitState(this.error) : super._();
+class ErrorBlocState<D, E extends Object> extends BlocState<D, E> {
+  const ErrorBlocState(this.error) : super._();
 
   final E error;
 
@@ -95,8 +95,8 @@ class ErrorCubitState<D, E extends Object> extends CubitState<D, E> {
   List<Object?> get props => [error];
 }
 
-class LoadedCubitState<D, E extends Object> extends CubitState<D, E> {
-  const LoadedCubitState(this.data) : super._();
+class LoadedBlocState<D, E extends Object> extends BlocState<D, E> {
+  const LoadedBlocState(this.data) : super._();
 
   final D data;
 

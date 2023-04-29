@@ -2,9 +2,9 @@ import 'package:casino_test/core/models/persistent_bloc_state.dart';
 import 'package:casino_test/domain/entities/characters_list_entity.dart';
 import 'package:equatable/equatable.dart';
 
-typedef CharactersState = PersistentCubitState<CharactersData, Object>;
+typedef CharactersState = PersistentBlocState<CharactersData, Object>;
 typedef LoadedCharactersState
-    = PersistentLoadedCubitState<CharactersData, Object>;
+    = PersistentLoadedBlocState<CharactersData, Object>;
 
 class CharactersData extends Equatable {
   final CharactersListEntity characterList;

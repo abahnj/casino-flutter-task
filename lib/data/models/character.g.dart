@@ -16,8 +16,10 @@ Character _$CharacterFromJson(Map<String, dynamic> json) => Character(
       gender: json['gender'] as String,
       episode:
           (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
-      origin: Location.fromJson(json['origin'] as Map<String, dynamic>),
-      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      origin: const LocationEntityConverter()
+          .fromJson(json['origin'] as Map<String, dynamic>),
+      location: const LocationEntityConverter()
+          .fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{

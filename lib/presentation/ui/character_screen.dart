@@ -159,7 +159,6 @@ class CharactersContent extends StatelessWidget {
           characters.length + (loading || charactersData.hasError ? 1 : 0),
       itemBuilder: (_, index) {
         if (index < characters.length) {
-          // Display the character item at this index
           return CharacterCard(character: characters[index]);
         } else {
           // Display the LoadingIndicator as the last item

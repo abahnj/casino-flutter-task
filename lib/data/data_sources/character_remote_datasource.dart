@@ -27,7 +27,6 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
 
       return SuccessResult(data: CharactersList.fromJson(jsonMap));
     } catch (error) {
-      // Handle the error and return a Error object with the error details
       return ErrorResult(error: error);
     }
   }

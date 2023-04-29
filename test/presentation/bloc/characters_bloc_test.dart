@@ -54,8 +54,8 @@ void main() {
       },
       act: (bloc) => bloc.add(const FetchCharacters()),
       expect: () => [
-        isA<PersistentLoadingCubitState<CharactersData, Object>>(),
-        isA<PersistentErrorCubitState<CharactersData, Object>>().having(
+        isA<PersistentLoadingBlocState<CharactersData, Object>>(),
+        isA<PersistentErrorBlocState<CharactersData, Object>>().having(
           (state) => state.error.toString(),
           'Exception: Data retrieval failed',
           'Exception: Data retrieval failed',

@@ -201,7 +201,7 @@ CharactersBloc createMockCharactersBloc({
   when(charactersBloc.close).thenAnswer((_) => Future.value());
   setMockBlocState(
     charactersBloc,
-    state: state ?? const PersistentLoadingCubitState(data: null),
+    state: state ?? const PersistentLoadingBlocState(data: null),
   );
   return charactersBloc;
 }
