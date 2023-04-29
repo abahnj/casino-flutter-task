@@ -1,20 +1,18 @@
+import 'package:casino_test/data/data_sources/character_remote_datasource.dart';
+import 'package:casino_test/data/repository/characters_repository.dart';
+import 'package:casino_test/data/repository/characters_repository_impl.dart';
 import 'package:casino_test/domain/usecases/get_characters_use_case.dart';
 import 'package:casino_test/presentation/bloc/characters_bloc.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
-import '../../data/data_sources/character_remote_datasource.dart';
-import '../../data/repository/characters_repository.dart';
-import '../../data/repository/characters_repository_impl.dart';
-
 final locator = GetIt.instance;
 
-void locatorSetup({ValueGetter<CharactersBloc>? testBloc}) {
+void locatorSetup() {
   final httpClient = Client();
 
   locator.registerFactory<CharactersBloc>(
-      testBloc ?? () => CharactersBloc(locator.get<GetCharacters>()));
+      () => CharactersBloc(locator.get<GetCharacters>()));
 
   locator.registerLazySingleton<GetCharacters>(
       () => GetCharacters(locator.get<CharactersRepository>()));

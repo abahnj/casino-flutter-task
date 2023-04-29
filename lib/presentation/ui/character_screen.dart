@@ -71,10 +71,10 @@ class _CharactersScreenConsumerState extends State<CharactersScreenConsumer> {
     return Scaffold(
       appBar: AppBar(title: const Text('Characters')),
       body: BlocConsumer<CharactersBloc, CharactersState>(
-        listener: (context, state) {},
+        listener: (_, __) {},
         builder: (_, state) => state.match(
           onLoading: (data) => data == null
-              ? _loadingWidget(context)
+              ? const LoadingIndicator()
               : _successfulWidget(
                   context: context,
                   data: data,
@@ -102,20 +102,6 @@ class _CharactersScreenConsumerState extends State<CharactersScreenConsumer> {
     );
   }
 
-  Widget _loadingWidget(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 50,
-        height: 50,
-        margin: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        child: const CircularProgressIndicator(),
-      ),
-    );
-  }
-
   Widget _successfulWidget(
           {required BuildContext context,
           required CharactersData data,
@@ -125,6 +111,8 @@ class _CharactersScreenConsumerState extends State<CharactersScreenConsumer> {
         charactersData: data,
         scrollController: controller,
         loading: loading,
+        onRetry: () =>
+            context.read<CharactersBloc>().add(const RetryAfterFailure()),
       );
 }
 
@@ -153,10 +141,12 @@ class CharactersContent extends StatelessWidget {
     required this.charactersData,
     required this.scrollController,
     this.loading = false,
+    required this.onRetry,
   });
 
   final CharactersData charactersData;
   final ScrollController scrollController;
+  final VoidCallback onRetry;
   final bool loading;
 
   @override
@@ -174,7 +164,9 @@ class CharactersContent extends StatelessWidget {
         } else {
           // Display the LoadingIndicator as the last item
           return charactersData.hasError
-              ? const RetryButton()
+              ? RetryButton(
+                  onRetry: onRetry,
+                )
               : const LoadingIndicator();
         }
       },

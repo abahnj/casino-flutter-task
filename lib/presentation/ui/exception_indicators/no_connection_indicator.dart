@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 /// Indicates that a connection error occurred.
 class NoConnectionIndicator extends StatelessWidget {
   const NoConnectionIndicator({
-    Key? key,
+    super.key,
     required this.onTryAgain,
-  }) : super(key: key);
+  });
 
   final VoidCallback onTryAgain;
 

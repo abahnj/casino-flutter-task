@@ -1,5 +1,4 @@
 import 'package:casino_test/data/models/character.dart';
-import 'package:casino_test/domain/entities/character_entity.dart';
 import 'package:casino_test/domain/entities/characters_list_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -19,26 +18,8 @@ class CharactersList extends CharactersListEntity {
 
   CharactersListEntity toEntity() {
     return CharactersListEntity(
-      info: PageInfoEntity(
-        count: info.count,
-        pages: info.pages,
-        next: info.next,
-        previous: info.previous,
-      ),
-      characters: characters
-          .map((character) => CharacterEntity(
-                id: character.id,
-                name: character.name,
-                image: character.image,
-                status: character.status,
-                species: character.species,
-                episode: character.episode,
-                type: character.type,
-                gender: character.gender,
-                origin: character.origin,
-                location: character.location,
-              ))
-          .toList(),
+      info: info,
+      characters: characters,
     );
   }
 

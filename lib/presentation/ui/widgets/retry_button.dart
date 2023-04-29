@@ -1,10 +1,9 @@
-import 'package:casino_test/presentation/bloc/characters_bloc.dart';
-import 'package:casino_test/presentation/bloc/characters_event.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RetryButton extends StatelessWidget {
-  const RetryButton({super.key});
+  const RetryButton({super.key, required this.onRetry});
+
+  final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +12,7 @@ class RetryButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {
-            context.read<CharactersBloc>().add(const FetchCharacters());
-          },
+          onPressed: onRetry,
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             textStyle: const TextStyle(fontSize: 18.0),
