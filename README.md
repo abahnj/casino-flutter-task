@@ -31,9 +31,18 @@ Implement pagination
         - [x] Initial error state (when fetching the first page)
         - [x] Next page error state (when fetching the next page after previous pages has been fetched successfully)
 
+## Bonus:
+- [x] Added tests
 
 ## Things to keep in mind
 - You need to use same libraries, but you can also add more (reasonable amount)
+    ### Added Libraries
+    - cached_network_image - for remote image caching
+    - bloc_concurrency - to avoid repeating ongoing requests
+    - bloc_test
+    - flutter_lints
+    - mocktail
+
 - Simulate a failure case by turning off your internet connection and a success case by turning on your internet connection.
 - Your code should compile without errors and app should run on both iOS and Android seamlessly
 - Keep things clean, simple and fun
